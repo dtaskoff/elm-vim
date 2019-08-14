@@ -16,6 +16,9 @@ function! elm#format_autosave() abort
     call rename(l:tmpname, expand('%'))
 
     silent edit!
+
+    " refresh the syntax highlight
+    syntax sync fromstart
   else
     echohl Error | echo 'elm-format: ' l:out | echohl None
   endif
