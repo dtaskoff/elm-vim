@@ -8,4 +8,17 @@ if exists("b:current_syntax")
   finish
 endif
 
+" Comments
+" Literals
+" Lists
+" Conditionals
+" Records
+" Functions
+" Operators
+" Let Expressions
+" Modules
+" Type Annotations
+" Type Aliases
+" Custom Types
+
 let b:current_syntax = "elm"
