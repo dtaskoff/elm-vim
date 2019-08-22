@@ -20,7 +20,10 @@ syn keyword elmTodo TODO FIXME XXX contained
 
 " Literals
 " Lists
+
 " Conditionals
+syn keyword elmConditional if then else case of
+
 " Records
 
 " Functions
@@ -47,6 +50,7 @@ hi def link elmDocTitle SpecialComment
 hi def link elmDocList SpecialComment
 hi def link elmDocLink SpecialComment
 hi def link elmTodo Todo
+hi def link elmConditional Conditional
 hi def link elmFunctionName Function
 hi def link elmModule Include
 
