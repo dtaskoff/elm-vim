@@ -42,10 +42,6 @@ syn region elmTopLevelFunctionBody start="=" end="^\S"me=s-1 contains=elmBoolean
 syn match elmDelimiter "[,[\]{}]" contained
 
 syn match elmFunctionName "\<\l\w*\>" contained
-syn region elmTypeSignature start=":" end="^.*="me=s-1 contains=elmType,elmTypeOperator,elmTypeArrow,elmSingleLineComment
-syn match elmType "\<\(\w\|\.\)*\>" contained
-syn match elmTypeOperator ":" contained
-syn match elmTypeArrow "->" contained
 
 " Operators
 syn match elmOperator "++\|::\|<<\|>>\|<|\||>\|&&\|||\|==\|/=\|<=\|>=\|<\|>\|+\|-\|*\|//\|/\|\^\|(\|)\|=" contained
@@ -57,6 +53,11 @@ syn keyword elmLetIn let in contained
 syn keyword elmModule module import as exposing
 
 " Type Annotations
+syn region elmTypeSignature start=":" end="^.*="me=s-1 contains=elmType,elmTypeOperator,elmTypeArrow,elmSingleLineComment
+syn match elmType "\<\(\w\|\.\)*\>" contained
+syn match elmTypeOperator ":" contained
+syn match elmTypeArrow "->" contained
+
 " Type Aliases
 " Custom Types
 
@@ -83,15 +84,16 @@ hi def link elmConditional Conditional
 
 hi def link elmDelimiter Delimiter
 hi def link elmFunctionName Function
-hi def link elmType Identifier
-hi def link elmTypeOperator Operator
-hi def link elmTypeArrow Operator
 
 hi def link elmOperator Operator
 
 hi def link elmLetIn Keyword
 
 hi def link elmModule Include
+
+hi def link elmType Identifier
+hi def link elmTypeOperator Operator
+hi def link elmTypeArrow Operator
 
 
 let b:current_syntax = "elm"
