@@ -63,6 +63,10 @@ syn match elmTypeArrow "->" contained
 " Type Aliases
 " Custom Types
 
+" Ports
+syn keyword elmPort port contained
+syn region elmPortDefinition start="port" end="^\S"me=s-1 contains=elmPort,elmFunctionName,elmTypeSignature
+
 
 " Highlighting
 hi def link elmSingleLineComment Comment
@@ -99,5 +103,6 @@ hi def link elmTypeVariable Type
 hi def link elmTypeOperator Operator
 hi def link elmTypeArrow Operator
 
+hi def link elmPort Define
 
 let b:current_syntax = "elm"
