@@ -38,7 +38,8 @@ syn keyword elmConditional if then else case of contained
 " Functions
 syn match elmTopLevelFunction "^\(\l\w*\)\s*:\(.*\n\)*\1" contains=elmFunctionName,elmTypeSignature nextgroup=elmTopLevelFunctionBody
 syn match elmTopLevelFunction "^\l\w*" contains=elmFunctionName nextgroup=elmTopLevelFunctionBody
-syn region elmTopLevelFunctionBody start="=" end="^\S"me=s-1 contains=elmConditional,elmOperator,elmBoolean,elmNumber,elmFloat,elmEscapeChar,elmUnicodeChar,elmChar,elmString,elmMultiLineString
+syn region elmTopLevelFunctionBody start="=" end="^\S"me=s-1 contains=elmConditional,elmDelimiter,elmOperator,elmBoolean,elmNumber,elmFloat,elmEscapeChar,elmUnicodeChar,elmChar,elmString,elmMultiLineString
+syn match elmDelimiter "[,[\]{}]" contained
 
 syn match elmFunctionName "\<\l\w*\>" contained
 syn region elmTypeSignature start=":" end="^.*="me=s-1 contains=elmType,elmTypeOperator,elmTypeArrow,elmSingleLineComment
@@ -47,7 +48,7 @@ syn match elmTypeOperator ":" contained
 syn match elmTypeArrow "->" contained
 
 " Operators
-syn match elmOperator "++\|::\|<<\|>>\|<|\||>\|&&\|||\|==\|/=\|<=\|>=\|<\|>\|+\|-\|*\|//\|/\|\^\|=" contained
+syn match elmOperator "++\|::\|<<\|>>\|<|\||>\|&&\|||\|==\|/=\|<=\|>=\|<\|>\|+\|-\|*\|//\|/\|\^\|(\|)\|=" contained
 
 " Let Expressions
 
@@ -79,6 +80,7 @@ hi def link elmMultiLineString String
 
 hi def link elmConditional Conditional
 
+hi def link elmDelimiter Delimiter
 hi def link elmFunctionName Function
 hi def link elmType Identifier
 hi def link elmTypeOperator Operator
