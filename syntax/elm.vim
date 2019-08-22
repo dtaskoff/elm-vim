@@ -16,9 +16,17 @@ endif
 " Functions
 " Operators
 " Let Expressions
+
 " Modules
+syn keyword elmModule module import as exposing
+
 " Type Annotations
 " Type Aliases
 " Custom Types
+
+
+" Highlighting
+hi def link elmModule Include
+
 
 let b:current_syntax = "elm"
