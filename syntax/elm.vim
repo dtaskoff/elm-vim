@@ -22,7 +22,12 @@ syn keyword elmTodo TODO FIXME XXX contained
 " Lists
 " Conditionals
 " Records
+
 " Functions
+syn match elmTopLevelFunction "^\(\l\w*\)\s*:\(.*\n\)*\1" contains=elmFunctionName
+syn match elmTopLevelFunction "^\l\w*" contains=elmFunctionName
+syn match elmFunctionName "\<\l\w*\>" contained
+
 " Operators
 " Let Expressions
 
@@ -42,6 +47,7 @@ hi def link elmDocTitle SpecialComment
 hi def link elmDocList SpecialComment
 hi def link elmDocLink SpecialComment
 hi def link elmTodo Todo
+hi def link elmFunctionName Function
 hi def link elmModule Include
 
 
