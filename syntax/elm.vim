@@ -36,7 +36,7 @@ syn keyword elmConditional if then else case of contained
 " Records
 
 " Functions
-syn match elmTopLevelFunction "^\(\l\w*\)\s*:\(.*\n\)*\1" contains=elmFunctionName,elmTypeSignature nextgroup=elmTopLevelFunctionBody
+syn match elmTopLevelFunction "^\(\l\w*\)\s*:\(.*\n\)*\1" contains=elmFunctionName nextgroup=elmTopLevelFunctionBody
 syn match elmTopLevelFunction "^\l\w*" contains=elmFunctionName nextgroup=elmTopLevelFunctionBody
 syn region elmTopLevelFunctionBody start="=" end="^\S"me=s-1 contains=elmBoolean,elmNumber,elmFloat,elmEscapeChar,elmUnicodeChar,elmChar,elmString,elmMultiLineString,elmConditional,elmDelimiter,elmOperator,elmLetIn,elmType,elmModuleImport
 syn match elmDelimiter "[,[\]{}]" contained
@@ -54,7 +54,7 @@ syn keyword elmModule module import as exposing
 syn match elmModuleImport "\<\(\u\w*.\)*\>" contained
 
 " Type Annotations
-syn region elmTypeSignature start=":" end="^.*="me=s-1 contains=elmType,elmTypeVariable,elmTypeOperator,elmTypeArrow,elmSingleLineComment
+syn region elmTypeSignature start=":" end="^\S"me=s-1 contains=elmSingleLineComment,elmMultiLineComment,elmType,elmTypeVariable,elmTypeOperator,elmTypeArrow
 syn match elmType "\<\(\u\w*.\)*\u\w*\.\@!\>" contained
 syn match elmTypeVariable "\<\l\w*\>" contained
 syn match elmTypeOperator ":" contained
