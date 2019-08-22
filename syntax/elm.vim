@@ -10,7 +10,11 @@ endif
 
 " Comments
 syn match elmSingleLineComment "--.*$" contains=elmTodo
-syn region elmMultiLineComment start="{-" end="-}" contains=elmTodo,elmMultiLineComment
+syn region elmMultiLineComment start="{-|\@!" end="-}" contains=elmTodo,elmDocComment,elmMultiLineComment
+syn region elmDocComment start="{-|" end="-}" contains=elmDocTitle,elmDocList,elmDocLink,elmTodo,elmMultiLineComment,elmDocComment
+syn match elmDocTitle "^# .*$" contained
+syn region elmDocList start="^@docs" end="^$" contained
+syn match elmDocLink "<.\+>" contained
 syn keyword elmTodo TODO FIXME XXX contained
 
 
@@ -33,6 +37,10 @@ syn keyword elmModule module import as exposing
 " Highlighting
 hi def link elmSingleLineComment Comment
 hi def link elmMultiLineComment Comment
+hi def link elmDocComment Comment
+hi def link elmDocTitle SpecialComment
+hi def link elmDocList SpecialComment
+hi def link elmDocLink SpecialComment
 hi def link elmTodo Todo
 hi def link elmModule Include
 
