@@ -38,7 +38,7 @@ syn keyword elmConditional if then else case of contained
 " Functions
 syn match elmTopLevelFunction "^\(\l\w*\)\s*:\(.*\n\)*\1" contains=elmFunctionName nextgroup=elmTopLevelFunctionBody
 syn match elmTopLevelFunction "^\l\w*" contains=elmFunctionName nextgroup=elmTopLevelFunctionBody
-syn region elmTopLevelFunctionBody start="=" end="^\S"me=s-1 contains=elmBoolean,elmNumber,elmFloat,elmEscapeChar,elmUnicodeChar,elmChar,elmString,elmMultiLineString,elmConditional,elmDelimiter,elmOperator,elmLetIn,elmType,elmModuleImport
+syn region elmTopLevelFunctionBody start="=" end="^\S"me=s-1 contains=elmBoolean,elmNumber,elmFloat,elmEscapeChar,elmUnicodeChar,elmChar,elmString,elmMultiLineString,elmConditional,elmDelimiter,elmOperator,elmLetIn,elmType,elmModuleName
 syn match elmDelimiter "[,[\]{}]" contained
 
 syn match elmFunctionName "\<\l\w*\>" contained
@@ -50,8 +50,11 @@ syn match elmOperator "++\|::\|<<\|>>\|<|\||>\|&&\|||\|==\|/=\|<=\|>=\|<\|>\|+\|
 syn keyword elmLetIn let in contained
 
 " Modules
-syn keyword elmModule module import as exposing
-syn match elmModuleImport "\<\(\u\w*.\)*\>" contained
+syn region elmModule start="^\(module\|port module\)" end="^\S"me=s-1 contains=elmModuleName,elmExposing,elmSingleLineComment,elmMultiLineComment
+syn region elmImport start="^import" end="^\S"me=s-1 contains=elmModuleName,elmExposing,elmSingleLineComment,elmMultiLineComment
+
+syn match elmModuleName "\<\(\u\w*.\)*\>" contained
+syn region elmExposing start="(" end=")" contains=elmFunctionName,elmType contained
 
 " Type Annotations
 syn region elmTypeSignature start=":" end="^\S"me=s-1 contains=elmSingleLineComment,elmMultiLineComment,elmType,elmTypeVariable,elmTypeOperator,elmTypeArrow
@@ -95,8 +98,9 @@ hi def link elmOperator Operator
 
 hi def link elmLetIn Keyword
 
-hi def link elmModule Include
-hi def link elmModuleImport Identifier
+hi def link elmModule Define
+hi def link elmImport Include
+hi def link elmModuleName Identifier
 
 hi def link elmType Type
 hi def link elmTypeVariable Type
