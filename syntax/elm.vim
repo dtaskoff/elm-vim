@@ -10,6 +10,7 @@ endif
 
 " Comments
 syn match elmSingleLineComment "--.*$" contains=elmTodo
+syn region elmMultiLineComment start="{-" end="-}" contains=elmTodo,elmMultiLineComment
 syn keyword elmTodo TODO FIXME XXX contained
 
 
@@ -31,6 +32,7 @@ syn keyword elmModule module import as exposing
 
 " Highlighting
 hi def link elmSingleLineComment Comment
+hi def link elmMultiLineComment Comment
 hi def link elmTodo Todo
 hi def link elmModule Include
 
