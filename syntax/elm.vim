@@ -9,6 +9,10 @@ if exists("b:current_syntax")
 endif
 
 " Comments
+syn match elmSingleLineComment "--.*$" contains=elmTodo
+syn keyword elmTodo TODO FIXME XXX contained
+
+
 " Literals
 " Lists
 " Conditionals
@@ -26,6 +30,8 @@ syn keyword elmModule module import as exposing
 
 
 " Highlighting
+hi def link elmSingleLineComment Comment
+hi def link elmTodo Todo
 hi def link elmModule Include
 
 
