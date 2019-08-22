@@ -38,7 +38,7 @@ syn keyword elmConditional if then else case of contained
 " Functions
 syn match elmTopLevelFunction "^\(\l\w*\)\s*:\(.*\n\)*\1" contains=elmFunctionName,elmTypeSignature nextgroup=elmTopLevelFunctionBody
 syn match elmTopLevelFunction "^\l\w*" contains=elmFunctionName nextgroup=elmTopLevelFunctionBody
-syn region elmTopLevelFunctionBody start="=" end="^\S"me=s-1 contains=elmConditional,elmDelimiter,elmOperator,elmBoolean,elmNumber,elmFloat,elmEscapeChar,elmUnicodeChar,elmChar,elmString,elmMultiLineString
+syn region elmTopLevelFunctionBody start="=" end="^\S"me=s-1 contains=elmBoolean,elmNumber,elmFloat,elmEscapeChar,elmUnicodeChar,elmChar,elmString,elmMultiLineString,elmConditional,elmDelimiter,elmOperator,elmLetIn
 syn match elmDelimiter "[,[\]{}]" contained
 
 syn match elmFunctionName "\<\l\w*\>" contained
@@ -51,6 +51,7 @@ syn match elmTypeArrow "->" contained
 syn match elmOperator "++\|::\|<<\|>>\|<|\||>\|&&\|||\|==\|/=\|<=\|>=\|<\|>\|+\|-\|*\|//\|/\|\^\|(\|)\|=" contained
 
 " Let Expressions
+syn keyword elmLetIn let in contained
 
 " Modules
 syn keyword elmModule module import as exposing
@@ -87,6 +88,8 @@ hi def link elmTypeOperator Operator
 hi def link elmTypeArrow Operator
 
 hi def link elmOperator Operator
+
+hi def link elmLetIn Keyword
 
 hi def link elmModule Include
 
