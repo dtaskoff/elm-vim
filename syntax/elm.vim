@@ -45,8 +45,8 @@ syn match elmOpeningBrace "{" contained
 syn match elmClosingBrace "}" contained
 
 " Functions
-syn match elmTopLevelFunction "^\(\l\w*\)\s*:\(.*\n\)*\1" contains=elmFunctionName nextgroup=elmTopLevelFunctionBody
-syn match elmTopLevelFunction "^\l\w*" contains=elmFunctionName nextgroup=elmTopLevelFunctionBody
+syn match elmTopLevelFunction "^\l\w*\ze\s*:" contains=elmFunctionName nextgroup=elmTypeSignature
+syn match elmTopLevelFunction "^\l\w*\>\ze.*=" contains=elmFunctionName nextgroup=elmTopLevelFunctionBody
 syn region elmTopLevelFunctionBody start="\s\+.*=" end="^\S"me=s-1 contains=elmOperator,elmParens,elmDelimiter,elmSingleLineComment,elmMultiLineComment,elmUnit,elmBoolean,elmNumber,elmFloat,elmChar,elmString,elmMultiLineString,elmConditional,elmOpeningBrace,elmClosingBrace,elmAs,elmLetIn,elmType,elmModuleName
 
 syn match elmFunctionName "\<\l\w*\>" contained
