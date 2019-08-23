@@ -2,10 +2,18 @@
 " Language: Elm
 " Maintainer: Daniel Taskoff <daniel.taskoff@gmail.com>
 " Last Change: 2019 Aug 23
+"
+" Options:
+" elm_highlight_types - distinguish types from other identifiers when
+" highlighting (the default is on)
 
 " quit when a syntax file was already loaded
 if exists("b:current_syntax")
   finish
+endif
+
+if !exists("elm_highlight_types")
+  let elm_highlight_types = 1
 endif
 
 " Operators
@@ -121,7 +129,11 @@ hi def link elmModule Define
 hi def link elmImport Include
 hi def link elmModuleName Identifier
 
-hi def link elmType Type
+if elm_highlight_types == 1
+  hi def link elmType Type
+else
+  hi def link elmType Identifier
+endif
 hi def link elmTypeOperator Operator
 hi def link elmTypeArrow Operator
 
