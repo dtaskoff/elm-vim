@@ -50,7 +50,7 @@ syn match elmOperator "++\|::\|<<\|>>\|<|\||>\|&&\|||\|==\|/=\|<=\|>=\|<\|>\|+\|
 syn keyword elmLetIn let in contained
 
 " Modules
-syn region elmModule start="^\(module\|port module\)" end="^\S"me=s-1 contains=elmModuleName,elmExposing,elmSingleLineComment,elmMultiLineComment
+syn region elmModule start="module" end="^\S"me=s-1 contains=elmModuleName,elmExposing,elmPort,elmSingleLineComment,elmMultiLineComment
 syn region elmImport start="^import" end="^\S"me=s-1 contains=elmModuleName,elmExposing,elmSingleLineComment,elmMultiLineComment
 
 syn match elmModuleName "\<\(\u\w*.\)*\>" contained
@@ -68,7 +68,7 @@ syn match elmTypeArrow "->" contained
 
 " Ports
 syn keyword elmPort port contained
-syn region elmPortDefinition start="port" end="^\S"me=s-1 contains=elmPort,elmFunctionName,elmTypeSignature
+syn region elmPortDefinition start="port" end="^\S"me=s-1 contains=elmPort,elmFunctionName,elmModule,elmTypeSignature
 
 
 " Highlighting
