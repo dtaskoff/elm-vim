@@ -12,7 +12,7 @@ endif
 syn match elmOperator "\\\|->\|++\|::\|<<\|>>\|<|\||>\|<\/>\|<?>\|&&\|||\||.\||=\|==\|/=\|<=\|>=\|<\|>\|+\|-\|*\|//\|/\|\^\|=\|\." contained
 syn match elmParens "(\|)" contained
 
-syn match elmDelimiter "[,[\]{}]" contained
+syn match elmDelimiter "[,[\]]" contained
 
 " Comments
 syn match elmSingleLineComment "--.*$" contains=elmTodo
@@ -40,11 +40,14 @@ syn region elmMultiLineString start=+"""+ end=+"""+ contains=elmEscapeChar,elmUn
 syn keyword elmConditional if then else case of contained
 
 " Records
+syn region elmRecord start="{" end="}"me=e-1 contains=elmOperator,elmDelimiter,elmOpeningBrace,elmTypeSignature nextgroup=elmClosingBrace contained
+syn match elmOpeningBrace "{" contained
+syn match elmClosingBrace "}" contained
 
 " Functions
 syn match elmTopLevelFunction "^\(\l\w*\)\s*:\(.*\n\)*\1" contains=elmFunctionName nextgroup=elmTopLevelFunctionBody
 syn match elmTopLevelFunction "^\l\w*" contains=elmFunctionName nextgroup=elmTopLevelFunctionBody
-syn region elmTopLevelFunctionBody start="\s\+.*=" end="^\S"me=s-1 contains=elmOperator,elmParens,elmDelimiter,elmSingleLineComment,elmMultiLineComment,elmUnit,elmBoolean,elmNumber,elmFloat,elmChar,elmString,elmMultiLineString,elmConditional,elmAs,elmLetIn,elmType,elmModuleName
+syn region elmTopLevelFunctionBody start="\s\+.*=" end="^\S"me=s-1 contains=elmOperator,elmParens,elmDelimiter,elmSingleLineComment,elmMultiLineComment,elmUnit,elmBoolean,elmNumber,elmFloat,elmChar,elmString,elmMultiLineString,elmConditional,elmOpeningBrace,elmClosingBrace,elmAs,elmLetIn,elmType,elmModuleName
 
 syn match elmFunctionName "\<\l\w*\>" contained
 syn keyword elmAs as contained
@@ -61,13 +64,14 @@ syn match elmModuleName "\<\(\u\w*.\)*\>" contained
 syn region elmExposing start="(" end=")" contains=elmOperator,elmFunctionName,elmExposing,elmType contained
 
 " Type Annotations
-syn region elmTypeSignature start=":" end="^\S"me=s-1 contains=elmSingleLineComment,elmMultiLineComment,elmType,elmTypeOperator,elmTypeArrow
+syn region elmTypeSignature start=":" end="\(^\S\|,\|}\)"me=s-1 contains=elmSingleLineComment,elmMultiLineComment,elmRecord,elmType,elmTypeOperator,elmTypeArrow,elmTuple
 syn match elmType "\<\(\u\w*.\)*\u\w*\.\@!\>" contained
 syn match elmTypeOperator ":" contained
 syn match elmTypeArrow "->" contained
+syn region elmTuple start="(" end=")" contains=elmType,elmTypeOperator,elmTypeArrow,elmTuple contained
 
 " Type Aliases and Custom Types
-syn region elmTypeDefinition start="type" end="^\S"me=s-1 contains=elmOperator,elmParens,elmSingleLineComment,elmMultiLineComment,elmTypeKeyword,elmType
+syn region elmTypeDefinition start="type" end="^\S"me=s-1 contains=elmOperator,elmParens,elmSingleLineComment,elmMultiLineComment,elmRecord,elmType,elmTypeKeyword
 syn keyword elmTypeKeyword type alias contained
 
 " Ports
@@ -99,6 +103,9 @@ hi def link elmString String
 hi def link elmMultiLineString String
 
 hi def link elmConditional Conditional
+
+hi def link elmOpeningBrace Delimiter
+hi def link elmClosingBrace Delimiter
 
 hi def link elmFunctionName Function
 hi def link elmAs Define
