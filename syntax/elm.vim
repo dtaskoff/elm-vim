@@ -65,7 +65,7 @@ syn region elmExposing start="(" end=")" contains=elmOperator,elmFunctionName,el
 
 " Type Annotations
 syn region elmTypeSignature start=":" end="\(^\S\|,\|}\)"me=s-1 contains=elmSingleLineComment,elmMultiLineComment,elmRecord,elmType,elmTypeOperator,elmTypeArrow,elmTuple
-syn match elmType "\<\(\u\w*.\)*\u\w*\.\@!\>" contained
+syn match elmType "\<\(\u\w*\.\)*\u\w*\.\@!\>" contained
 syn match elmTypeOperator ":" contained
 syn match elmTypeArrow "->" contained
 syn region elmTuple start="(" end=")" contains=elmType,elmTypeOperator,elmTypeArrow,elmTuple contained
