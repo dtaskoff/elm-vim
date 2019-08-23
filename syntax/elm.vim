@@ -124,4 +124,8 @@ hi def link elmTypeKeyword Define
 
 hi def link elmPort Define
 
+
+" refresh the syntax highlight
+syntax sync fromstart
+
 let b:current_syntax = "elm"
