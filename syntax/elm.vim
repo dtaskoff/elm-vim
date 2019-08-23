@@ -40,20 +40,23 @@ syn region elmMultiLineString start=+"""+ end=+"""+ contains=elmEscapeChar,elmUn
 syn keyword elmConditional if then else case of contained
 
 " Records
-syn region elmRecord start="{" end="}"me=e-1 contains=elmOperator,elmDelimiter,elmOpeningBrace,elmTypeSignature nextgroup=elmClosingBrace contained
+syn region elmRecord start="{" end="}"me=e-1 contains=elmOperator,elmDelimiter,elmOpeningBrace,elmRecordTypeSignature nextgroup=elmClosingBrace contained
 syn match elmOpeningBrace "{" contained
 syn match elmClosingBrace "}" contained
 
 " Functions
-syn match elmTopLevelFunction "^\l\w*\ze\s*:" contains=elmFunctionName nextgroup=elmTypeSignature
+syn match elmTopLevelFunction "^\l\w*\ze\s*:" contains=elmFunctionName nextgroup=elmTopLevelTypeSignature
 syn match elmTopLevelFunction "^\l\w*\>\ze.*=" contains=elmFunctionName nextgroup=elmTopLevelFunctionBody
-syn region elmTopLevelFunctionBody start="\s\+.*=" end="^\S"me=s-1 contains=elmOperator,elmParens,elmDelimiter,elmSingleLineComment,elmMultiLineComment,elmUnit,elmBoolean,elmNumber,elmFloat,elmChar,elmString,elmMultiLineString,elmConditional,elmOpeningBrace,elmClosingBrace,elmAs,elmLetIn,elmType,elmModuleName
+syn region elmTopLevelFunctionBody start="\s\+.*=" end="^\S"me=s-1 contains=elmOperator,elmParens,elmDelimiter,elmSingleLineComment,elmMultiLineComment,elmUnit,elmBoolean,elmNumber,elmFloat,elmChar,elmString,elmMultiLineString,elmConditional,elmOpeningBrace,elmClosingBrace,elmAs,elmLetExpression,elmIn,elmType,elmModuleName
 
 syn match elmFunctionName "\<\l\w*\>" contained
 syn keyword elmAs as contained
 
 " Let Expressions
-syn keyword elmLetIn let in contained
+syn region elmLetExpression start="\<let\>" end="\<in\>"me=s-1 contains=elmOperator,elmParens,elmDelimiter,elmSingleLineComment,elmMultiLineComment,elmUnit,elmBoolean,elmNumber,elmFloat,elmChar,elmString,elmMultiLineString,elmConditional,elmOpeningBrace,elmClosingBrace,elmAs,elmLetExpression,elmLet,elmIn,elmLocalTypeSignature,elmType,elmModuleName nextgroup=elmIn contained
+
+syn keyword elmLet let contained
+syn keyword elmIn in contained
 
 " Modules
 syn region elmModule start="module" end="^\S"me=s-1 contains=elmModuleName,elmExposing,elmPort,elmSingleLineComment,elmMultiLineComment
@@ -63,7 +66,9 @@ syn match elmModuleName "\<\(\u\w*\.\)*\u\w*\>" contained
 syn region elmExposing start="(" end=")" contains=elmOperator,elmFunctionName,elmExposing,elmType contained
 
 " Type Annotations
-syn region elmTypeSignature start=":" end="\(^\S\|,\|}\)"me=s-1 contains=elmSingleLineComment,elmMultiLineComment,elmRecord,elmType,elmTypeOperator,elmTypeArrow,elmTuple
+syn region elmTopLevelTypeSignature start=":" end="^\S"me=s-1 contains=elmSingleLineComment,elmMultiLineComment,elmRecord,elmClosingBrace,elmType,elmTypeOperator,elmTypeArrow,elmTuple
+syn region elmRecordTypeSignature start=":" end=",\|}"me=s-1 contains=elmSingleLineComment,elmMultiLineComment,elmRecord,elmType,elmTypeOperator,elmTypeArrow,elmTuple contained
+syn match elmLocalTypeSignature "\(^\s\+\l\w*\)\s*:\(.\|\n\)*\1\(\s\|=\)"me=e-1 contains=elmSingleLineComment,elmMultiLineComment,elmRecord,elmClosingBrace,elmType,elmTypeOperator,elmTypeArrow,elmTuple contained
 syn match elmType "\<\(\u\w*\.\)*\u\w*\.\@!\>" contained
 syn match elmTypeOperator ":" contained
 syn match elmTypeArrow "->" contained
@@ -109,7 +114,8 @@ hi def link elmClosingBrace Delimiter
 hi def link elmFunctionName Function
 hi def link elmAs Define
 
-hi def link elmLetIn Keyword
+hi def link elmLet Keyword
+hi def link elmIn Keyword
 
 hi def link elmModule Define
 hi def link elmImport Include
