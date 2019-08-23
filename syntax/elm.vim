@@ -63,8 +63,9 @@ syn match elmTypeVariable "\<\l\w*\>" contained
 syn match elmTypeOperator ":" contained
 syn match elmTypeArrow "->" contained
 
-" Type Aliases
-" Custom Types
+" Type Aliases and Custom Types
+syn region elmTypeDefinition start="type" end="^\S"me=s-1 contains=elmSingleLineComment,elmMultiLineComment,elmOperator,elmTypeKeyword,elmType,elmTypeVariable
+syn keyword elmTypeKeyword type alias contained
 
 " Ports
 syn keyword elmPort port contained
@@ -107,6 +108,8 @@ hi def link elmType Type
 hi def link elmTypeVariable Type
 hi def link elmTypeOperator Operator
 hi def link elmTypeArrow Operator
+
+hi def link elmTypeKeyword Define
 
 hi def link elmPort Define
 
