@@ -52,7 +52,6 @@ syn region elmTopLevelFunctionBody start="\s\+.*=" end="^\S"me=s-1 contains=elmO
 syn match elmFunctionName "\<\l\w*\>" contained
 syn keyword elmAs as contained
 
-
 " Let Expressions
 syn keyword elmLetIn let in contained
 
