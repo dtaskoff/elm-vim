@@ -58,14 +58,13 @@ syn match elmModuleName "\<\(\u\w*.\)*\>" contained
 syn region elmExposing start="(" end=")" contains=elmFunctionName,elmExposing,elmType contained
 
 " Type Annotations
-syn region elmTypeSignature start=":" end="^\S"me=s-1 contains=elmSingleLineComment,elmMultiLineComment,elmType,elmTypeVariable,elmTypeOperator,elmTypeArrow
+syn region elmTypeSignature start=":" end="^\S"me=s-1 contains=elmSingleLineComment,elmMultiLineComment,elmType,elmTypeOperator,elmTypeArrow
 syn match elmType "\<\(\u\w*.\)*\u\w*\.\@!\>" contained
-syn match elmTypeVariable "\<\l\w*\>" contained
 syn match elmTypeOperator ":" contained
 syn match elmTypeArrow "->" contained
 
 " Type Aliases and Custom Types
-syn region elmTypeDefinition start="type" end="^\S"me=s-1 contains=elmOperator,elmSingleLineComment,elmMultiLineComment,elmTypeKeyword,elmType,elmTypeVariable
+syn region elmTypeDefinition start="type" end="^\S"me=s-1 contains=elmOperator,elmSingleLineComment,elmMultiLineComment,elmTypeKeyword,elmType
 syn keyword elmTypeKeyword type alias contained
 
 " Ports
@@ -106,7 +105,6 @@ hi def link elmImport Include
 hi def link elmModuleName Identifier
 
 hi def link elmType Type
-hi def link elmTypeVariable Type
 hi def link elmTypeOperator Operator
 hi def link elmTypeArrow Operator
 
