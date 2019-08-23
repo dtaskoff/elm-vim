@@ -54,7 +54,7 @@ syn region elmModule start="module" end="^\S"me=s-1 contains=elmModuleName,elmEx
 syn region elmImport start="^import" end="^\S"me=s-1 contains=elmModuleName,elmExposing,elmSingleLineComment,elmMultiLineComment
 
 syn match elmModuleName "\<\(\u\w*.\)*\>" contained
-syn region elmExposing start="(" end=")" contains=elmFunctionName,elmType contained
+syn region elmExposing start="(" end=")" contains=elmFunctionName,elmExposing,elmType contained
 
 " Type Annotations
 syn region elmTypeSignature start=":" end="^\S"me=s-1 contains=elmSingleLineComment,elmMultiLineComment,elmType,elmTypeVariable,elmTypeOperator,elmTypeArrow
