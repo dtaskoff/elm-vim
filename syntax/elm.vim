@@ -26,7 +26,7 @@ syn match elmDelimiter "[,[\]]" contained
 syn match elmSingleLineComment "--.*$" contains=elmTodo
 syn region elmMultiLineComment start="{-|\@!" end="-}" contains=elmTodo,elmDocComment,elmMultiLineComment
 syn region elmDocComment start="{-|" end="-}" contains=elmDocTitle,elmDocList,elmDocLink,elmTodo,elmMultiLineComment,elmDocComment
-syn match elmDocTitle "^# .*$" contained
+syn match elmDocTitle "^#\+ .*$" contained
 syn region elmDocList start="^@docs" end="^$" contained
 syn match elmDocLink "<.\+>" contained
 syn keyword elmTodo TODO FIXME XXX contained
