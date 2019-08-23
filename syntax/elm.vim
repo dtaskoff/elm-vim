@@ -17,8 +17,11 @@ syn region elmDocList start="^@docs" end="^$" contained
 syn match elmDocLink "<.\+>" contained
 syn keyword elmTodo TODO FIXME XXX contained
 
+" Operators
+syn match elmOperator "\\\|->\|++\|::\|<<\|>>\|<|\||>\|&&\|||\||.\||=\|==\|/=\|<=\|>=\|<\|>\|+\|-\|*\|//\|/\|\^\|(\|)\|=\|\." contained
 
 " Literals
+syn match elmUnit "()" contained
 syn keyword elmBoolean True False contained
 syn match elmNumber "-\?\<\d\+\>" contained
 syn match elmFloat "-\?\<\d\+\.\d\+\>" contained
@@ -38,13 +41,10 @@ syn keyword elmConditional if then else case of contained
 " Functions
 syn match elmTopLevelFunction "^\(\l\w*\)\s*:\(.*\n\)*\1" contains=elmFunctionName nextgroup=elmTopLevelFunctionBody
 syn match elmTopLevelFunction "^\l\w*" contains=elmFunctionName nextgroup=elmTopLevelFunctionBody
-syn region elmTopLevelFunctionBody start="=" end="^\S"me=s-1 contains=elmBoolean,elmNumber,elmFloat,elmEscapeChar,elmUnicodeChar,elmChar,elmString,elmMultiLineString,elmConditional,elmDelimiter,elmOperator,elmLetIn,elmType,elmModuleName
+syn region elmTopLevelFunctionBody start="=" end="^\S"me=s-1 contains=elmOperator,elmUnit,elmBoolean,elmNumber,elmFloat,elmEscapeChar,elmUnicodeChar,elmChar,elmString,elmMultiLineString,elmConditional,elmDelimiter,elmLetIn,elmType,elmModuleName
 syn match elmDelimiter "[,[\]{}]" contained
 
 syn match elmFunctionName "\<\l\w*\>" contained
-
-" Operators
-syn match elmOperator "++\|::\|<<\|>>\|<|\||>\|&&\|||\|==\|/=\|<=\|>=\|<\|>\|+\|-\|*\|//\|/\|\^\|(\|)\|=" contained
 
 " Let Expressions
 syn keyword elmLetIn let in contained
@@ -80,6 +80,9 @@ hi def link elmDocList SpecialComment
 hi def link elmDocLink SpecialComment
 hi def link elmTodo Todo
 
+hi def link elmOperator Operator
+
+hi def link elmUnit Constant
 hi def link elmBoolean Boolean
 hi def link elmNumber Number
 hi def link elmFloat Float
@@ -93,8 +96,6 @@ hi def link elmConditional Conditional
 
 hi def link elmDelimiter Delimiter
 hi def link elmFunctionName Function
-
-hi def link elmOperator Operator
 
 hi def link elmLetIn Keyword
 
