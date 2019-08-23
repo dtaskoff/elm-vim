@@ -60,7 +60,7 @@ syn keyword elmLetIn let in contained
 syn region elmModule start="module" end="^\S"me=s-1 contains=elmModuleName,elmExposing,elmPort,elmSingleLineComment,elmMultiLineComment
 syn region elmImport start="^import" end="^\S"me=s-1 contains=elmModuleName,elmExposing,elmSingleLineComment,elmMultiLineComment
 
-syn match elmModuleName "\<\(\u\w*.\)*\>" contained
+syn match elmModuleName "\<\(\u\w*\.\)*\u\w*\>" contained
 syn region elmExposing start="(" end=")" contains=elmOperator,elmFunctionName,elmExposing,elmType contained
 
 " Type Annotations
