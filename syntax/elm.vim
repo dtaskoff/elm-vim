@@ -41,7 +41,7 @@ syn keyword elmConditional if then else case of contained
 " Functions
 syn match elmTopLevelFunction "^\(\l\w*\)\s*:\(.*\n\)*\1" contains=elmFunctionName nextgroup=elmTopLevelFunctionBody
 syn match elmTopLevelFunction "^\l\w*" contains=elmFunctionName nextgroup=elmTopLevelFunctionBody
-syn region elmTopLevelFunctionBody start="=" end="^\S"me=s-1 contains=elmOperator,elmUnit,elmBoolean,elmNumber,elmFloat,elmEscapeChar,elmUnicodeChar,elmChar,elmString,elmMultiLineString,elmConditional,elmDelimiter,elmLetIn,elmType,elmModuleName
+syn region elmTopLevelFunctionBody start="=" end="^\S"me=s-1 contains=elmOperator,elmUnit,elmBoolean,elmNumber,elmFloat,elmChar,elmString,elmMultiLineString,elmConditional,elmDelimiter,elmLetIn,elmType,elmModuleName
 syn match elmDelimiter "[,[\]{}]" contained
 
 syn match elmFunctionName "\<\l\w*\>" contained
