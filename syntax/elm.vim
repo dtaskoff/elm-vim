@@ -43,9 +43,11 @@ syn keyword elmConditional if then else case of contained
 " Functions
 syn match elmTopLevelFunction "^\(\l\w*\)\s*:\(.*\n\)*\1" contains=elmFunctionName nextgroup=elmTopLevelFunctionBody
 syn match elmTopLevelFunction "^\l\w*" contains=elmFunctionName nextgroup=elmTopLevelFunctionBody
-syn region elmTopLevelFunctionBody start="\s\+.*=" end="^\S"me=s-1 contains=elmOperator,elmDelimiter,elmSingleLineComment,elmMultiLineComment,elmUnit,elmBoolean,elmNumber,elmFloat,elmChar,elmString,elmMultiLineString,elmConditional,elmLetIn,elmType,elmModuleName
+syn region elmTopLevelFunctionBody start="\s\+.*=" end="^\S"me=s-1 contains=elmOperator,elmDelimiter,elmSingleLineComment,elmMultiLineComment,elmUnit,elmBoolean,elmNumber,elmFloat,elmChar,elmString,elmMultiLineString,elmConditional,elmAs,elmLetIn,elmType,elmModuleName
 
 syn match elmFunctionName "\<\l\w*\>" contained
+syn keyword elmAs as contained
+
 
 " Let Expressions
 syn keyword elmLetIn let in contained
@@ -97,6 +99,7 @@ hi def link elmMultiLineString String
 hi def link elmConditional Conditional
 
 hi def link elmFunctionName Function
+hi def link elmAs Define
 
 hi def link elmLetIn Keyword
 
