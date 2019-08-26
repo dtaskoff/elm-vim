@@ -11,6 +11,7 @@ let b:did_indent = 1
 
 setlocal expandtab shiftwidth=4 softtabstop=4 tabstop=4
 setlocal indentexpr=GetElmIndent()
+setlocal indentkeys+==right
 setlocal nolisp
 setlocal nosmartindent
 
@@ -24,15 +25,22 @@ function! GetElmIndent()
 	if lnum == 0
     return 0
   endif
-  
+
   let ind = indent(lnum)
   let lline = getline(lnum)
   let line = getline(v:lnum)
-  
+
   " indent bodies of functions
   if lline =~# '=$'
     return ind + shiftwidth()
+
+  " indent inside cases
+  elseif line =~# 'right\>'
+    return indent(search('^\s*case', 'bW')) + shiftwidth()
+  elseif lline =~# '->$'
+    return ind + shiftwidth()
+
   endif
-  
+
   return ind
 endfunction
