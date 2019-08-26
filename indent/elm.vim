@@ -19,5 +19,20 @@ if exists("*GetElmIndent")
 endif
 
 function! GetElmIndent()
-  return 0
+  let lnum = v:lnum - 1
+
+	if lnum == 0
+    return 0
+  endif
+  
+  let ind = indent(lnum)
+  let lline = getline(lnum)
+  let line = getline(v:lnum)
+  
+  " indent bodies of functions
+  if lline =~# '=$'
+    return ind + shiftwidth()
+  endif
+  
+  return ind
 endfunction
