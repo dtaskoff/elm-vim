@@ -8,6 +8,10 @@ function! elm#format_autosave() abort
   let l:tmpname = tempname() . '.elm'
   call writefile(getline(1, '$'), l:tmpname)
 
+  " write the current redo history
+  let l:tmpundo = tempname()
+  exe 'wundo! ' . tmpundo
+
   " run elm-format
   let l:out = system('elm-format ' . l:tmpname . ' --output ' . l:tmpname)
 
@@ -25,6 +29,10 @@ function! elm#format_autosave() abort
 
   " clean up
   call delete(l:tmpname)
+
+  " restore redo history
+  silent! exe 'rundo ' . l:tmpundo
+  call delete(l:tmpundo)
 
   " restore cursor and windows positions
   call winrestview(l:curw)
